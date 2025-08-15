@@ -7,6 +7,29 @@
     <title>Home</title>
 </head>
 <body>
-    Olá Flask
+    <table class="table table-light">
+        <thead class="thead-light">
+            <tr>
+                <th>ID</th>
+                <th>Foto</th>
+                <th>Nome</th>
+                <th>E-mail</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for func in funcionarios  %}
+                <tr>
+                    <td>{{func[0] }}</td>
+                    <td>{{func[3] }}</td>
+                    <td>{{func[1] }}</td>
+                    <td>{{func[2] }}</td>
+                    <td>Editar | Excluir</td>
+                </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
 </body>
 </html>

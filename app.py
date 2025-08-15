@@ -17,12 +17,17 @@ mysql.init_app(app)
 
 def home():
 
-    sql = "INSERT INTO `empregados` (`id`, `nome`, `email`, `foto`) VALUES (NULL, 'Amanda', 'amanda@gmail.com', 'fotoamanda.jpg'); "
+    sql = "SELECT * FROM `empregados`;"
     conn = mysql.connect()
     cursor=conn.cursor()
     cursor.execute(sql)
-    conn.commit()
-    return render_template('funcionarios/index.html')
+
+    #Para selecionar as infos do banco
+    funcionarios = cursor.fetchall()
+    print(funcionarios) #agora atualizando a index já mostra no vscode
+
+    conn.commit()                                      #Essa variavel é a do print(funcionarios) que recebeu os dados
+    return render_template('funcionarios/index.html', funcionarios=funcionarios)
 
 #Essa rota chama o template Create.HTML
 @app.route('/create')
