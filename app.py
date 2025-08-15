@@ -29,6 +29,17 @@ def home():
     conn.commit()                                      #Essa variavel é a do print(funcionarios) que recebeu os dados
     return render_template('funcionarios/index.html', funcionarios=funcionarios)
 
+#Rota para Excluir, delete
+@app.route('/delete/<int:id>')
+def delete(id):
+
+    #Conectar com banco
+    conn = mysql.connect()
+    cursor=conn.cursor()
+    cursor.execute("DELETE FROM empregados WHERE id=%s",(id))
+    conn.commit();
+    return redirect('/')
+
 #Essa rota chama o template Create.HTML
 @app.route('/create')
 def create():
