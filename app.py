@@ -2,6 +2,7 @@ from flask import Flask,redirect,url_for,render_template,request
 from flaskext.mysql import MySQL
 from datetime import datetime
 import os #múdulo  do sistema operacional p/ buscar a foto
+from flask import send_from_directory
 
 app=Flask(__name__)
 
@@ -16,6 +17,10 @@ mysql.init_app(app)
 #Para mostrar a foto
 PASTA = os.path.join('uploads')
 app.config['PASTA'] = PASTA
+
+@app.route('/uploads/<nomeFoto>')
+def uploads(nomeFoto):
+    return send_from_directory(app.config['PASTA'], nomeFoto)
 
 
 @app.route('/', methods=['GET','POST'])

@@ -14,7 +14,7 @@
             {% for func in funcionarios  %}
                 <tr>
                     <td>{{func[0] }}</td>
-                    <td>{{func[3] }}</td>
+                    <td><img class="img-thumbnail" width="100" src="uploads/{{func[3] }}" alt=""></td>
                     <td>{{func[1] }}</td>
                     <td>{{func[2] }}</td>
                     <td><a href="/edit/{{func[0]}}">Editar</a> |  <a href="/delete/{{func[0]}}">Excluir</a></td>

@@ -14,7 +14,9 @@ Editar Funcionário
     <input type="text" value="{{ func[2] }}" name="txtEmail" id="txtEmail">
     <br>
     Foto
-    {{ func[3] }}
+    <br>
+    <img class="img-thumbnail" width="100" src="{{ url_for("uploads", nomeFoto=func[3]) }}" alt="">
+    <br>
     <input type="file" name="txtFoto" id="txtFoto">
     <br>
     <br>
