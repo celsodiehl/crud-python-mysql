@@ -1,6 +1,7 @@
 from flask import Flask,redirect,url_for,render_template,request
 from flaskext.mysql import MySQL
 from datetime import datetime
+import os #múdulo  do sistema operacional p/ buscar a foto
 
 app=Flask(__name__)
 
@@ -11,6 +12,10 @@ app.config['MYSQL_DATABASE_USER'] = 'root'
 app.config['MYSQL_DATABASE_PASSWORD'] = ''
 app.config['MYSQL_DATABASE_DB'] = 'funcionarios'
 mysql.init_app(app)
+
+#Para mostrar a foto
+PASTA = os.path.join('uploads')
+app.config['PASTA'] = PASTA
 
 
 @app.route('/', methods=['GET','POST'])
@@ -67,11 +72,27 @@ def update():
     sql = "UPDATE empregados SET nome = %s, email = %s WHERE id = %s;"
     
     #vai enviar nessa ordem
-    dados =(_nome, _email, id)
+    dados = (_nome, _email, id)
 
     conn = mysql.connect()
     cursor=conn.cursor()
-    cursor.execute(sql, dados)
+
+     #Criar tempo agora e variavel tempo para novo nome da foto
+    now = datetime.now()
+    tempo = now.strftime("%Y%H%M%S") #Ano - Hora - Mes - Segundo
+    if _foto.filename != '':
+        #variavel de novo nome da foto
+        novo_nomeFoto = tempo + _foto.filename
+        #salva na pasta uploads
+        _foto.save("uploads/" + novo_nomeFoto)
+
+        cursor.execute("SELECT foto FROM empregados WHERE id = %s", id)
+        fila = cursor.fetchall()
+        os.remove(os.path.join(app.config['PASTA'], fila[0][0]))
+        cursor.execute("UPDATE empregados SET foto = %s WHERE id = %s", (novo_nomeFoto, id))
+        conn.commit()
+                   
+    cursor.execute(sql, dados)               
     conn.commit()
 
     return redirect('/')
