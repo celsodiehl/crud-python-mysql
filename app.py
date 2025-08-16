@@ -41,6 +41,12 @@ def delete(id):
     #Conectar com banco
     conn = mysql.connect()
     cursor=conn.cursor()
+
+   #Para excluir imagem foto da PASTA
+    cursor.execute("SELECT foto FROM empregados WHERE id = %s", id)
+    fila = cursor.fetchall()
+    os.remove(os.path.join(app.config['PASTA'], fila[0][0]))
+    
     cursor.execute("DELETE FROM empregados WHERE id=%s",(id))
     conn.commit();
     return redirect('/')
