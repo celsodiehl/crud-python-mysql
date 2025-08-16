@@ -40,7 +40,43 @@ def delete(id):
     conn.commit();
     return redirect('/')
 
-#Essa rota chama o template Create.HTML
+#Rota para Editar, edit
+@app.route('/edit/<int:id>')
+def edit(id):
+
+    #Conecta com banco
+    conn = mysql.connect()
+    cursor=conn.cursor()
+    cursor.execute("SELECT * FROM empregados WHERE id=%s",(id))
+
+    #Para selecionar dados do banco
+    funcionarios = cursor.fetchall()
+    print(funcionarios)
+    return render_template('funcionarios/edit.html', funcionarios=funcionarios)
+
+#Rota para Update
+@app.route('/update', methods=['POST'])
+def update():
+
+    #variaveis que receberão dados p/ Atualizar
+    _nome = request.form['txtNome']
+    _email = request.form['txtEmail']
+    _foto = request.files['txtFoto']
+    id = request.form['txtId']
+
+    sql = "UPDATE empregados SET nome = %s, email = %s WHERE id = %s;"
+    
+    #vai enviar nessa ordem
+    dados =(_nome, _email, id)
+
+    conn = mysql.connect()
+    cursor=conn.cursor()
+    cursor.execute(sql, dados)
+    conn.commit()
+
+    return redirect('/')
+
+#Rota / chama o template Create.HTML
 @app.route('/create')
 def create():
     return render_template('funcionarios/create.html')

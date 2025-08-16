@@ -1,0 +1,24 @@
+Editar Funcionário
+{% for func in funcionarios  %}
+
+<form method="post" action="/update" enctype="multipart/form-data">
+
+    ID.:
+    <input type="text" value="{{ func[0] }}" name="txtId" id="txtId">
+
+    Nome.:
+    <input type="text" value="{{ func[1] }}" name="txtNome" id="txtNome">
+    <br>
+    E-mail
+    <input type="text" value="{{ func[2] }}" name="txtEmail" id="txtEmail">
+    <br>
+    Foto
+    {{ func[3] }}
+    <input type="file" name="txtFoto" id="txtFoto">
+    <br>
+    <br>
+    <input type="submit" value="Cadastrar">
+
+</form>
+    
+{% endfor %}
