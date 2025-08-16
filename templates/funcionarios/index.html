@@ -1,4 +1,9 @@
 {% include 'header.html' %}
+<br/>
+
+<a href="{{url_for('create')}}" class="btn btn-success">Novo Funcionário</a>
+<br>
+<br>
     <table class="table table-light">
         <thead class="thead-light">
             <tr>
@@ -17,7 +22,7 @@
                     <td><img class="img-thumbnail" width="100" src="uploads/{{func[3] }}" alt=""></td>
                     <td>{{func[1] }}</td>
                     <td>{{func[2] }}</td>
-                    <td><a href="/edit/{{func[0]}}">Editar</a> |  <a href="/delete/{{func[0]}}">Excluir</a></td>
+                    <td><a class="btn btn-warning" href="/edit/{{func[0]}}">Editar</a> |  <a onclick="return confirm('Deseja realmente excluir?')" class="btn btn-danger" href="/delete/{{func[0]}}">Excluir</a></td>
                 </tr>
             {% endfor %}
 
