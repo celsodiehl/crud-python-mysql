@@ -1,17 +1,40 @@
 {% include 'header.html' %}
+<br>
 <form method="post" action="/store" enctype="multipart/form-data">
 
-    Nome.:
-    <input type="text" name="txtNome" id="txtNome">
-    <br>
-    E-mail
-    <input type="text" name="txtEmail" id="txtEmail">
-    <br>
-    Foto
-    <input type="file" name="txtFoto" id="txtFoto">
-    <br>
-    <br>
-    <input type="submit" value="Cadastrar">
+    <div class="card">
+        <div class="card-header">
+            Funcionários
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Dados do Funcioário</h5>
+            <p class="card-text">
+
+                <div class="form-group">
+                    <label for="txtNome">Nome</label>
+                    <input id="txtNome" class="form-control" type="text" name="txtNome">
+                </div>
+
+                <div class="form-group">
+                    <label for="txtEmail">E-mail</label>
+                    <input id="txtEmail" class="form-control" type="text" name="txtEmail">
+                </div>
+
+                <div class="form-group">
+                    <label for="txtFoto">Foto</label>
+                    <input id="txtFoto" class="form-control" type="file" name="txtFoto">
+                </div>
+
+              <div class="form-group">
+                <input type="submit" class="btn btn-success" value="Cadastrar">
+                <a href="{{url_for('home')}}" class="btn btn-primary">Voltar</a>
+              </div>
+
+            </p>
+        </div>
+    </div>
+
+    
 
 </form>
 {% include 'footer.html' %}
