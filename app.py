@@ -143,7 +143,7 @@ def storage():
     cursor=conn.cursor()
     cursor.execute(sql, dados)
     conn.commit()
-    return render_template('funcionarios/index.html')
+    return redirect('/')
 
 if __name__ == '__main__':
     #DEBUG is SET to TRUE. CHANGE FOR PROD
