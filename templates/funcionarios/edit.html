@@ -4,23 +4,38 @@ Editar Funcionário
 
 <form method="post" action="/update" enctype="multipart/form-data">
 
-    ID.:
-    <input type="text" value="{{ func[0] }}" name="txtId" id="txtId">
+    <div class="card">
+        <div class="card-header">
+            Editar Funcionário
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Dados do Funcionário</h5>
+            <p class="card-text">
 
-    Nome.:
-    <input type="text" value="{{ func[1] }}" name="txtNome" id="txtNome">
-    <br>
-    E-mail
-    <input type="text" value="{{ func[2] }}" name="txtEmail" id="txtEmail">
-    <br>
-    Foto
-    <br>
-    <img class="img-thumbnail" width="100" src="{{ url_for("uploads", nomeFoto=func[3]) }}" alt="">
-    <br>
-    <input type="file" name="txtFoto" id="txtFoto">
-    <br>
-    <br>
-    <input type="submit" value="Cadastrar">
+                <div class="form-group">
+                    <label for="txtNome">Nome.:</label>
+                    <input id="txtNome" value="{{ func[1] }}" class="form-control" type="text" name="txtNome">
+                </div>
+
+                <div class="form-group">
+                    <label for="txtEmail">E-mail.:</label>
+                    <input id="txtEmail" value="{{ func[2] }}" class="form-control" type="text" name="txtEmail">
+                </div>
+
+                <div class="form-group">
+                    <label for="txtFoto">Foto</label>
+                    <img class="img-thumbnail" width="100" src="{{ url_for("uploads", nomeFoto=func[3]) }}" alt="">
+                    <input id="txtFoto" class="form-control" type="file" name="txtFoto">
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" class="btn btn-success" value="Cadastrar">
+                    <a href="{{url_for("home")}}" class="btn btn-primary">Voltar</a>
+                </div>  
+
+            </p>
+        </div>
+    </div>
 
 </form>
     
