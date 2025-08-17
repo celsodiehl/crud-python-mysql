@@ -1,10 +1,11 @@
-from flask import Flask,redirect,url_for,render_template,request
+from flask import Flask,redirect,url_for,render_template,request, flash
 from flaskext.mysql import MySQL
 from datetime import datetime
 import os #múdulo  do sistema operacional p/ buscar a foto
 from flask import send_from_directory
 
 app=Flask(__name__)
+app.secret_key="Development"
 
 #Conexão com MySQL
 mysql = MySQL()
@@ -126,6 +127,11 @@ def storage():
     _nome = request.form['txtNome']
     _email = request.form['txtEmail']
     _foto = request.files['txtFoto']
+
+    #Validação para mensagem de vazio
+    if _nome =='' or _email == '' or _foto =='':
+        flash('Preencha todos os campos!')
+        return redirect(url_for('create'))
 
     #Criar tempo agora e variavel tempo para novo nome da foto
     now = datetime.now()
